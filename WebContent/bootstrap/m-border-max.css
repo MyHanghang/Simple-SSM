@@ -1,0 +1,30 @@
+.m-bord-max {
+	width: 1200px;
+	height: auto;
+	padding-left: 30px !important;
+	padding-right: 30px !important;
+	padding-top: 30px !important;
+	padding-bottom: 30px !important;
+	border-width: 2px;
+}
+
+table tr td {
+	text-align: center;
+}
+
+h1 {
+	text-align: center;
+}
+
+.com-opt {
+	padding-right: 1.8rem;
+	color: #afbac0;
+	font-size: 1.6rem;
+	border: none;
+	outline: none;
+	/*去掉默认的下拉三角*/
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	/*添加下拉三角图标*/
+}

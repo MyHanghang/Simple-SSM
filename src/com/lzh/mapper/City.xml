@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lzh.mapper.CityMapper">
+	<select id="cityList" parameterType="int" resultType="City">
+		SELECT
+		c.id,c.cityName,c.ProvinceId
+		FROM city c
+		RIGHT JOIN province p ON
+		c.ProvinceId=#{id}
+		GROUP BY c.id
+	</select>
+</mapper>
+

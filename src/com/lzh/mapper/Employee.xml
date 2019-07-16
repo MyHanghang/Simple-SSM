@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lzh.mapper.EmployeeMapper">
+	<select id="employeeList" resultType="EmployeeCustomer">
+		SELECT
+		e.id,e.empName,e.empAge,e.empSex,e.empHeadPortrait,
+		p.provinceName as
+		province ,c.cityName as city
+		FROM employee e
+		LEFT JOIN city c ON
+		c.id=e.city
+		LEFT JOIN province p ON p.id=c.ProvinceId
+		ORDER BY id desc
+	</select>
+	<select id="findEmployeeById" resultType="EmployeeCustomer"
+		parameterType="int">
+		SELECT
+		e.id,e.empName,e.empAge,e.empSex,e.empHeadPortrait,
+		c.cityName as city,
+		p.provinceName as province
+		from employee e
+		RIGHT JOIN city c ON c.id =
+		e.city
+		LEFT JOIN province p ON
+		p.id=c.ProvinceId
+		where e.id=#{id}
+	</select>
+	<select id="findProCityById" resultType="CityProvince"
+		parameterType="int">
+		SELECT
+		e.city as cId,
+		e.province as pId,
+		c.cityName,
+		p.provinceName
+		FROM
+		employee e
+		RIGHT JOIN city c ON c.id = e.city
+		LEFT
+		JOIN province p ON p.id=c.ProvinceId
+		WHERE e.id =#{id}
+	</select>
+
+	<insert id="addEmp" parameterType="com.lzh.model.Employee">
+		INSERT INTO
+		employee
+		(empName,empAge,empSex,empHeadPortrait,city,province)
+		VALUES(
+		#{empName},
+		#{empAge},
+		#{empSex},
+		#{empHeadPortrait},
+		#{city},
+		#{province})
+	</insert>
+
+	<insert id="saveEditEmp" parameterType="com.lzh.model.Employee">
+		UPDATE employee
+		SET
+		empName=#{empName},
+		empAge=#{empAge},
+		empSex=#{empSex},
+		empHeadPortrait=#{empHeadPortrait},
+		city=#{city},
+		province=#{province}
+		WHERE id=#{id}
+	</insert>
+	<select id="SearchEmployee" resultType="Employee" parameterType="string">
+		SELECT
+		e.id,e.empName,e.empAge,e.empSex,e.empHeadPortrait,
+		p.provinceName as
+		province ,c.cityName as city
+		FROM employee e
+		LEFT JOIN city c ON
+		c.id=e.city
+		LEFT JOIN province p ON p.id=c.ProvinceId
+		WHERE empName LIKE '%' #{empName} '%'
+	</select>
+</mapper>
+
